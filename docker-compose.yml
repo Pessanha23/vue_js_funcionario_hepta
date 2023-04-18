@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  tomcat:
+    image: tomcat:9
+    container_name: my-tomcat
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./webapps:/usr/local/tomcat/webapps
+    environment:
+      - MYSQL_HOST=my-mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=mydb
+      - MYSQL_USER=myuser
+      - MYSQL_PASSWORD=mypassword
+
+  mysql:
+    image: mysql:latest
+    container_name: my-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=funcionarios_prova
+#      - MYSQL_USER=myuser
+#      - MYSQL_PASSWORD=mypassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
