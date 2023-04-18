@@ -27,7 +27,7 @@ public class FuncionarioDAO {
 
 	public Funcionario update(Funcionario funcionario) throws Exception {
 		EntityManager em = HibernateUtil.getEntityManager();
-		Funcionario funcionarioAtualizado = null;
+		Funcionario funcionarioAtualizado;
 		try {
 			em.getTransaction().begin();
 			funcionarioAtualizado = em.merge(funcionario);
@@ -59,7 +59,7 @@ public class FuncionarioDAO {
 
 	public Funcionario find(Integer id) throws Exception {
 		EntityManager em = HibernateUtil.getEntityManager();
-		Funcionario Funcionario = null;
+		Funcionario Funcionario;
 		try {
 			Funcionario = em.find(Funcionario.class, id);
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class FuncionarioDAO {
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> getAll() throws Exception {
 		EntityManager em = HibernateUtil.getEntityManager();
-		List<Funcionario> Funcionarios = new ArrayList<>();
+		List<Funcionario> Funcionarios;
 		try {
 			Query query = em.createQuery("FROM Funcionario f join fetch f.setor ");
 			Funcionarios = query.getResultList();
