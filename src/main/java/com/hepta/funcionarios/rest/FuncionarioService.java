@@ -51,7 +51,7 @@ public class FuncionarioService {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response funcionarioRead() {
-        List<Funcionario> funcionarios = new ArrayList<>();
+        List<Funcionario> funcionarios;
         try {
             funcionarios = dao.getAll();
         } catch (Exception e) {
@@ -109,10 +109,13 @@ public class FuncionarioService {
     @DELETE
     public Response FuncionarioDelete(@PathParam("id") Integer id) throws Exception {
         Funcionario funcionario = dao.find(id);
+
         if (funcionario == null) {
             throw new NotFoundException("Funcionário não encontrado");
         }
+
         dao.delete(id);
+
         return Response.ok().build();
     }
 
